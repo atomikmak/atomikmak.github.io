@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>חידת הבניין</title>
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
@@ -327,26 +328,6 @@ select:focus{outline:none;border-color:#3344aa;}
     });
   }
 
-  function scheduleFlicker(){
-    setTimeout(()=>{
-      ['right','left'].forEach(side=>{
-        if(Math.random()<0.45){
-          const b=document.getElementById('bld-'+side);
-          if(!b)return;
-          const floors=[...b.querySelectorAll('.floor:not(.top)')];
-          if(!floors.length)return;
-          const floor=floors[Math.floor(Math.random()*floors.length)];
-          const wins=[...floor.querySelectorAll('.win')];
-          const win=wins[Math.floor(Math.random()*wins.length)];
-          win.style.background='#4a3a10';
-          win.style.boxShadow='0 0 5px rgba(255,200,60,0.25)';
-          setTimeout(()=>{win.style.background='';win.style.boxShadow='';},350+Math.random()*500);
-        }
-      });
-      scheduleFlicker();
-    },3500+Math.random()*5500);
-  }
-
   const CARCOLORS=['#c0392b','#2471a3','#1e8449','#7d6608','#6c3483','#aab7b8','#784212','#1a252f'];
   function spawnCar(){
     const street=document.getElementById('street');
@@ -473,7 +454,6 @@ select:focus{outline:none;border-color:#3344aa;}
       ctrl.style.transition='opacity 1s,transform 1s';ctrl.style.opacity='1';ctrl.style.transform='translateY(0)';
       sbar.style.transition='opacity 1s';sbar.style.opacity='1';
     },1600);
-    setTimeout(scheduleFlicker,2500);
     setTimeout(spawnCar,1800+Math.random()*1500);
     setTimeout(spawnPerson,1200+Math.random()*1500);
     setTimeout(spawnPerson,3500+Math.random()*1500);
