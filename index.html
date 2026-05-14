@@ -168,7 +168,7 @@ select:focus{outline:none;border-color:#3344aa;}
     <div class="stext" id="stxt">כוון את שני הצדדים כדי לפתוח את החידה</div>
     <div class="dot" id="dot-l"></div>
   </div>
-  <div class="banner" id="banner">✦ החלון נפתח ✦</div>
+  <div class="banner" id="banner">✦ תשובה נכונה! ✦</div>
 </div>
 
 <script>
@@ -369,11 +369,10 @@ select:focus{outline:none;border-color:#3344aa;}
     if(both){
       dotR.style.cssText='background:#22cc77;box-shadow:0 0 8px #22cc77;';
       dotL.style.cssText='background:#22cc77;box-shadow:0 0 8px #22cc77;';
-      stxt.textContent='תשובה נכונה!';stxt.style.color='#22cc77';
       banner.classList.add('show');
     } else {
       dotR.style.cssText='background:#252a42;';dotL.style.cssText='background:#252a42;';
-      stxt.textContent='כוון את שני הצדדים כדי לפתוח את החידה';stxt.style.color='#4a5580';
+      stxt.textContent='כל הרמזים לפניך, מה התשובה?';stxt.style.color='#4a5580';
       banner.classList.remove('show');
     }
   }
