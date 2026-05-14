@@ -224,27 +224,7 @@ select:focus{outline:none;border-color:#3344aa;}
     entry.appendChild(roof2);
     entry.appendChild(door);
     r.appendChild(entry);
-
-    // דוד שמש — טנק לבן ורגל ופאנל
-    const dodWrap=document.createElement('div');
-    dodWrap.style.cssText=`position:absolute;bottom:0;${side==='right'?'right:90px':'left:90px'};display:flex;flex-direction:column;align-items:center;gap:0;`;
-
-    const tank=document.createElement('div');
-    tank.style.cssText='width:26px;height:18px;background:#d8d4cc;border:1.5px solid #a09888;border-radius:3px;position:relative;';
-    const tankInner=document.createElement('div');
-    tankInner.style.cssText='position:absolute;top:3px;left:3px;right:3px;bottom:3px;border:1px solid rgba(120,110,100,0.35);border-radius:1px;';
-    tank.appendChild(tankInner);
-
-    const leg=document.createElement('div');
-    leg.style.cssText='width:2px;height:8px;background:#8a8880;margin:0 auto;';
-
-    const panel=document.createElement('div');
-    panel.style.cssText='width:32px;height:9px;background:linear-gradient(135deg,#1a3a5c 0%,#2a60cc 50%,#1a3a5c 100%);border:1px solid #3a6ecc;border-radius:1px;';
-
-    dodWrap.appendChild(tank);
-    dodWrap.appendChild(leg);
-    dodWrap.appendChild(panel);
-    r.appendChild(dodWrap);
+    
   }
 
   function buildSide(side){
