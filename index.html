@@ -13,6 +13,7 @@
 }
 .scene{display:flex;align-items:flex-end;justify-content:center;width:100%;max-width:660px;}
 .half{flex:1;display:flex;flex-direction:column;align-items:center;overflow:visible;opacity:0;position:relative;}
+.sky{width:100%;height:80px;position:relative;overflow:hidden;}
 .sun{width:30px;height:30px;border-radius:50%;background:#FFD060;position:absolute;top:18px;left:50%;transform:translateX(-50%);animation:sunGlow 3s ease-in-out infinite;}
 @keyframes sunGlow{0%,100%{box-shadow:0 0 14px 4px rgba(255,208,60,0.4),0 0 32px 10px rgba(255,180,0,0.15)}50%{box-shadow:0 0 22px 8px rgba(255,208,60,0.55),0 0 50px 18px rgba(255,180,0,0.25)}}
 .rain-canvas{position:absolute;inset:0;pointer-events:none;}
