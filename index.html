@@ -11,9 +11,15 @@ html,body{height:100%;overflow:hidden;background:#0d1b3e;}
   font-family:'Rubik',sans-serif;direction:rtl;
   height:100vh;max-height:100vh;overflow:hidden;
   display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
-  padding:16px 8px 0;background:#0d1b3e;transition:background 2.5s;
+  padding:16px 8px;background:#0d1b3e;transition:background 2.5s;
 }
-.scene{display:flex;align-items:flex-end;justify-content:center;width:100%;max-width:660px;position:relative;z-index:100;}
+.scene{
+  display:flex;align-items:flex-end;justify-content:center;
+  width:100%;max-width:660px;
+  flex:1;
+  order:2;
+  z-index:1;
+}
 .half{flex:1;display:flex;flex-direction:column;align-items:center;overflow:visible;opacity:0;position:relative;}
 
 .sky{
@@ -31,7 +37,7 @@ html,body{height:100%;overflow:hidden;background:#0d1b3e;}
   width:100%;max-width:295px;background:#151929;
   border:1px solid #252a42;border-bottom:none;
   transform:scaleY(0);transform-origin:bottom;transition:border-color 2.5s;
-  position:relative;z-index:50;
+  position:relative;z-index:10;
 }
 .building.green-bld{border-color:#1a4525!important;background:#0a1e0f!important;}
 .floor{display:flex;padding:5px 4px;gap:2px;border-bottom:1px solid #0d1020;background:#161a2e;transition:background 2.5s;}
@@ -50,7 +56,8 @@ html,body{height:100%;overflow:hidden;background:#0d1b3e;}
   width:100%;max-width:660px;position:relative;
   height:60px;background:#080c18;border-top:2px solid #252a42;
   overflow:hidden;transition:background 2.5s;
-  z-index:80;
+  z-index:50;
+  order:1;
 }
 .street-wrap.green-street{background:#040e08!important;border-top-color:#1a4525!important;}
 .sidewalk{position:absolute;bottom:0;left:0;right:0;height:10px;background:#0e1228;border-top:1px solid #1a2040;}
@@ -58,14 +65,14 @@ html,body{height:100%;overflow:hidden;background:#0d1b3e;}
   position:absolute;left:0;right:0;height:2px;bottom:26px;
   background:repeating-linear-gradient(to right,#1e2448 0,#1e2448 16px,transparent 16px,transparent 28px);
 }
-.lamppost{position:absolute;bottom:10px;width:3px;background:#1e2340;z-index:10;}
+.lamppost{position:absolute;bottom:10px;width:3px;background:#1e2340;z-index:60;}
 .lamppost::after{content:'';position:absolute;top:-3px;left:-5px;width:13px;height:3px;background:#1e2340;border-radius:2px;}
 .lamppost::before{content:'';position:absolute;top:-8px;left:1px;width:5px;height:5px;border-radius:50%;background:#ffe8a0;box-shadow:0 0 6px 2px rgba(255,232,120,0.5);}
 
-.divider{width:6px;height:380px;background:#0d1b3e;align-self:flex-end;flex-shrink:0;transition:background 2.5s;position:relative;z-index:50;}
+.divider{width:6px;height:380px;background:#0d1b3e;align-self:flex-end;flex-shrink:0;transition:background 2.5s;position:relative;z-index:10;}
 .divider.green-div{background:#06150d!important;}
 
-.controls{display:flex;gap:10px;width:100%;max-width:660px;margin-top:14px;opacity:1;transform:translateY(0);transition:opacity 0.6s,visibility 0.6s;visibility:visible;}
+.controls{display:flex;gap:10px;width:100%;max-width:660px;margin-top:14px;opacity:1;transform:translateY(0);transition:opacity 0.6s,visibility 0.6s;visibility:visible;order:3;}
 .controls.hidden{opacity:0;transform:translateY(12px);visibility:hidden;}
 .panel{flex:1;background:#111524;border:1px solid #252a42;border-radius:8px;padding:12px 10px;display:flex;flex-direction:column;gap:8px;}
 .ptitle{text-align:center;font-size:13px;font-weight:600;color:#7a8ab0;letter-spacing:0.04em;margin-bottom:2px;}
@@ -75,7 +82,7 @@ select{width:100%;background:#090c18;color:#c0d0ee;border:1px solid #2a3050;bord
 select:focus{outline:none;border-color:#4455cc;}
 select:hover{border-color:#3a4a88;}
 
-.statusbar{display:flex;align-items:center;gap:10px;width:100%;max-width:660px;justify-content:center;margin-top:12px;opacity:1;transition:opacity 0.6s,visibility 0.6s;visibility:visible;}
+.statusbar{display:flex;align-items:center;gap:10px;width:100%;max-width:660px;justify-content:center;margin-top:12px;opacity:1;transition:opacity 0.6s,visibility 0.6s;visibility:visible;order:4;}
 .statusbar.hidden{opacity:0;visibility:hidden;}
 .dot{width:9px;height:9px;border-radius:50%;background:#252a42;transition:background 0.6s,box-shadow 0.6s;flex-shrink:0;}
 .stext{font-size:12px;color:#4a5580;text-align:center;transition:color 0.5s;font-family:'Rubik',sans-serif;}
@@ -102,6 +109,12 @@ select:hover{border-color:#3a4a88;}
 </head>
 <body>
 <div id="app">
+  <div class="street-wrap" id="street">
+    <div class="road-line"></div>
+    <div class="sidewalk"></div>
+    <div class="lamppost" style="left:18%;height:32px;"></div>
+    <div class="lamppost" style="left:81%;height:32px;"></div>
+  </div>
   <div class="scene" id="scene">
     <div class="half" id="half-right">
       <div class="sky" id="sky-right" data-side="right"></div>
@@ -114,12 +127,6 @@ select:hover{border-color:#3a4a88;}
       <div class="rooftop-items" id="roof-left"></div>
       <div class="building" id="bld-left"></div>
     </div>
-  </div>
-  <div class="street-wrap" id="street">
-    <div class="road-line"></div>
-    <div class="sidewalk"></div>
-    <div class="lamppost" style="left:18%;height:32px;"></div>
-    <div class="lamppost" style="left:81%;height:32px;"></div>
   </div>
   <div class="controls" id="controls">
     <div class="panel">
@@ -233,7 +240,6 @@ select:hover{border-color:#3a4a88;}
     const size=34;
     const sun=document.createElement('div');
     sun.className='sun-el';
-    // start half-submerged at bottom, rise to upper area
     const startY=sky.offsetHeight - size/2;
     const endY=22;
     sun.style.cssText='position:absolute;width:'+size+'px;height:'+size+'px;left:50%;margin-left:-'+(size/2)+'px;top:'+startY+'px;z-index:20;';
@@ -298,7 +304,6 @@ select:hover{border-color:#3a4a88;}
 
   function animateRain(sky){
     animateClouds(sky,true);
-    // clipping wrapper for canvas
     const clip=document.createElement('div');
     clip.style.cssText='position:absolute;inset:0;overflow:hidden;pointer-events:none;';
     const canvas=document.createElement('canvas');
@@ -364,11 +369,10 @@ select:hover{border-color:#3a4a88;}
     const street=document.getElementById('street');
     const goRight=Math.random()<0.5;
     const lane=goRight?'R':'L';
-    // lane positions: goRight → bottom lane (above sidewalk ~22px), goLeft → upper lane (~38px)
     const bot=goRight?22:38;
     const col=CARCOLORS[Math.floor(Math.random()*CARCOLORS.length)];
     const car=document.createElement('div');
-    car.style.cssText=`position:absolute;bottom:${bot}px;width:36px;height:14px;z-index:5;`;
+    car.style.cssText=`position:absolute;bottom:${bot}px;width:36px;height:14px;z-index:70;`;
     const body=document.createElement('div');
     body.style.cssText=`position:absolute;bottom:0;left:0;right:0;height:10px;background:${col};border-radius:2px 2px 1px 1px;`;
     const top=document.createElement('div');
@@ -418,13 +422,12 @@ select:hover{border-color:#3a4a88;}
     const skin=SKIN[Math.floor(Math.random()*SKIN.length)];
     const shirt=SHIRTS[Math.floor(Math.random()*SHIRTS.length)];
     const p=document.createElement('div');
-    p.style.cssText='position:absolute;width:7px;z-index:90;';
+    p.style.cssText='position:absolute;width:7px;z-index:100;';
     const head=document.createElement('div');
     head.style.cssText=`width:7px;height:7px;border-radius:50%;background:${skin};position:absolute;top:0;left:0;`;
     const body=document.createElement('div');
     const bh=8+Math.floor(Math.random()*3);
     body.style.cssText=`width:5px;height:${bh}px;background:${shirt};position:absolute;top:6px;left:1px;border-radius:1px;`;
-    // legs
     const legL=document.createElement('div');
     legL.style.cssText=`width:2px;height:5px;background:${skin};position:absolute;top:${6+bh}px;left:1px;border-radius:1px;`;
     const legR=document.createElement('div');
@@ -433,7 +436,6 @@ select:hover{border-color:#3a4a88;}
     const sw=street.offsetWidth||660;
     let pos=goRight?-10:sw+10;
     p.style.left=pos+'px';
-    // people walk on sidewalk — bottom ~2px
     p.style.bottom='2px';
     if(!goRight)p.style.transform='scaleX(-1)';
     street.appendChild(p);
@@ -443,10 +445,8 @@ select:hover{border-color:#3a4a88;}
       pos+=goRight?speed:-speed;
       step++;
       p.style.left=pos+'px';
-      // bob up/down
       const bob=Math.abs(Math.sin(step*0.3))*2;
       p.style.bottom=(2+bob)+'px';
-      // leg swing
       const swing=Math.sin(step*0.3)*3;
       legL.style.transform=`rotate(${swing}deg)`;
       legR.style.transform=`rotate(${-swing}deg)`;
@@ -483,7 +483,6 @@ select:hover{border-color:#3a4a88;}
       dotL.style.cssText='background:#22cc77;box-shadow:0 0 8px #22cc77;';
       banner.classList.add('show');
       playTing();
-      // Hide controls and statusbar
       controls.classList.add('hidden');
       sbar.classList.add('hidden');
     } else {
@@ -495,7 +494,6 @@ select:hover{border-color:#3a4a88;}
   }
   window.chk=chk;
 
-  // add sunGlow2 keyframe dynamically
   const styleEl=document.createElement('style');
   styleEl.textContent=`@keyframes sunGlow2{0%,100%{box-shadow:0 0 16px 5px rgba(255,208,60,0.45),0 0 36px 12px rgba(255,180,0,0.18)}50%{box-shadow:0 0 24px 9px rgba(255,208,60,0.6),0 0 55px 20px rgba(255,180,0,0.28)}}`;
   document.head.appendChild(styleEl);
@@ -549,7 +547,7 @@ select:hover{border-color:#3a4a88;}
       o.connect(g);g.connect(ac.destination);o.type='sine';
       const t=when+i*0.12;
       o.frequency.setValueAtTime(freq,t);o.frequency.exponentialRampToValueAtTime(freq*1.38,t+0.07);
-      o.frequency.exponentialRampToValueAtValue(freq*1.06,t+0.14);
+      o.frequency.exponentialRampToValueAtTime(freq*1.06,t+0.14);
       g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(0.018,t+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+0.18);
       o.start(t);o.stop(t+0.2);
     });
@@ -558,7 +556,6 @@ select:hover{border-color:#3a4a88;}
     if(!ac)return;
     if(ac.state==='suspended')ac.resume();
     const now=ac.currentTime;
-    // bright metallic ting: two sine tones with fast decay
     [[1047,0],[1319,0.04],[2093,0.08]].forEach(function(pair){
       const freq=pair[0],delay=pair[1];
       const o=ac.createOscillator(),g=ac.createGain();
